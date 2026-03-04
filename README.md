@@ -1,0 +1,1 @@
+# Improving-Condition-Monitoring-of-the-CNC-Machines-via-Synthetic-Data-in-the-Frequency-Domain
