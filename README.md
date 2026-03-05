@@ -13,7 +13,7 @@ The dataset can be downloaded from the following repository - https://github.com
 Codes for Condition Monitoring
 
 - Functions_FeatureExtraction.py            - Functions for performing feature extraction spectrograms. Check the path to the data folder -  CNC_Machining-main which should be dowloaded first (see the previous section).  
-- Main_FeatureExtraction_CNC.py             - Can be configured to perform various extraction of various features (FFT, Mel Spectrograms, Mel Energy, STFT). Paper uses only Mel Spectrogram.
+- Main_FeatureExtraction_CNC.py             - Can be configured to perform various extraction of various features (FFT, Mel Spectrograms, Mel Energy, STFT). Paper uses only MEL_ENERGY.
 - TorchClassificationModels.py              - Torch implementaion of NNs for state classification.
 - Main_Classification_Model.py              - Script for training the condiiton monitoring model. For the paper the script used the following arguments --focal_loss
 - Test_Classification_Model.py              - Load and test models. Should be run with arguments --focal_loss
