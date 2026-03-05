@@ -145,7 +145,7 @@ print(sum(y_test==1))
 # %%
 ####################### TEST DATA ######################
 
-device = 'mps' # cuda, mps
+device = 'cuda' # cuda, mps
 N_out = 2
 
 
