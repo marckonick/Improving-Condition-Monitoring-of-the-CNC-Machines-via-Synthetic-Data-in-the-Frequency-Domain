@@ -2,7 +2,7 @@
 The official repository for the paper "Improving Condition Monitoring of the CNC-Machines-via Synthetic Data in the Frequency Domain" - Splitech 2026 
 
 ## Description 
-This paper 
+Condition monitoring (CM) of CNC machines is challenging due to the scarce and severely imbalanced fault data, as failure events are usually rare. This paper proposes a frequency-domain synthetic data augmentation pipeline to improve fault detection across machining operations. Using the Bosch CNC Machining Dataset, tri-axial vibration signals from multiple machines are denoised via wavelet packet decomposition and transformed into compact log Mel-filterbank energy features. A lightweight convolutional neural network is trained for state classification under imbalance using balanced batch sampling and focal loss. To enrich the minority faulty class, conditional denoising diffusion probabilistic model is developed on Mel-energy representations. The model employs a U-Net architecture with classifier-free guidance for operation conditioned generation and incorporates a novel composite loss function that combines v-parameterization, clean sample reconstruction, temporal total variation, and macro-envelope matching to ensure both local time-frequency fidelity and global modulation structure preservation. Synthetic quality is assessed in the classifier embedding space using maximum mean discrepancy and kNN precision and recall, and downstream CM impact is measured via per-operation confusion matrices. Results show that adding generated samples generally increases faulty-state recognition while preserving high normal-state accuracy, with strong distributional alignment.
 
 ## Dataset info 
 
