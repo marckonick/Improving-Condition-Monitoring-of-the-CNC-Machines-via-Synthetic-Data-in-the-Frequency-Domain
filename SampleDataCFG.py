@@ -308,7 +308,7 @@ labels_2_ops = {v: k for k, v in rel_dict.items()}
 
 
     
-device = 'mps'  # change to 'cuda' if on GPU
+device = 'cuda'  # cuda mps
 T = 400
 N_ec = 11       # number of real operation classes (must match training)
     
@@ -333,14 +333,16 @@ print(f"Model loaded. Null class index = {model.null_class_idx}")
 
 T = 400
 ops_to_generate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # contiguous indices
-samples_per_op = 2
+samples_per_op = 40
     
+
 guidance_scale = 1.32   # around 1.32 
 
-# 
 per_op_guidance = {
-        3: 1.12,   # OP 4
+        3: 3.2,   # OP 4
         4: 1.12,   # OP 5
+        5: 1.12,    # OP 7
+        6: 4.05,    # OP 8
         8: 3.6,   # OP 11
         10: 4.5   # OP 14 
         # all others will use the global default
@@ -348,43 +350,26 @@ per_op_guidance = {
     
 
 # GENERATE FOR QUALITY ESTIMATE 
-samples_per_op_q = [2 for _ in range(11)]
+samples_per_op_q = [samples_per_op for _ in range(11)]
 x_samples, _, y_samples_real = get_sampled_data(ops_to_generate, samples_per_op_q, guidance_scale)
 
 print(f"\nTotal generated: {x_samples.shape}")
-np.save("x_samples_diffusion_melener.npy", x_samples)
-np.save("y_samples_diffusion_melener.npy", y_samples_real)
+np.save("saved_generated_data/x_samples_diffusion_melener.npy", x_samples)
+np.save("saved_generated_data/y_samples_diffusion_melener.npy", y_samples_real)
 print("Saved to x_samples_diffusion_melener.npy, y_samples_diffusion_melener.npy")
 
 
 # GENERATE FOR AUGMENTATION 
-samples_per_op_synth_a = [300,300,300,0,320,100,200,0,0,100,350]
-samples_per_op_synth_a = [10 for _ in range(11)]
-x_samples, y_samples, _ = get_sampled_data(ops_to_generate, samples_per_op_synth_a, guidance_scale)
+#samples_per_op_synth_a = [300,300,300,0,320,100,200,0,0,100,350]
+#samples_per_op_synth_a = [10 for _ in range(11)]
+#x_samples, y_samples, _ = get_sampled_data(ops_to_generate, samples_per_op_synth_a, guidance_scale)
 
 
-print(f"\nTotal generated: {x_samples.shape}")
-np.save("X_DIFF_AUG_FEAT.npy", x_samples)
-np.save("Y_DIFF_AUG_FEAT.npy", y_samples)
+#print(f"\nTotal generated: {x_samples.shape}")
+#np.save("saved_generated_data/X_DIFF_AUG_FEAT.npy", x_samples)
+#np.save("saved_generated_data/Y_DIFF_AUG_FEAT.npy", y_samples)
 
-print("Saved X_DIFF_AUG_FEAT Y_DIFF_AUG_FEAT.npy, Y_DIFF_AUG_FEAT.npy")
+#print("Saved X_DIFF_AUG_FEAT Y_DIFF_AUG_FEAT.npy, Y_DIFF_AUG_FEAT.npy")
 
 
-    
-# ===========================================================
-# GUIDANCE SCALE SWEEP (optional - for finding the best w)
-# ===========================================================
 
-"""
-    Uncomment to run a sweep and visually compare:
-    
-    test_op = 1  # OP 2 (the weakest class)
-    test_labels = torch.full((5,), test_op, dtype=torch.long)
-    
-    for w in [1.0, 1.5, 2.0, 2.5, 3.0, 4.0]:
-        samples = sample_ddim_cfg(
-            model, test_labels, T=T, num_steps=100,
-            guidance_scale=w, eta=0.0, device=device)
-        np.save(f"sweep_op{test_op}_w{w}.npy", samples.cpu().numpy())
-        print(f"  w={w}: saved. min={samples.min():.2f}, max={samples.max():.2f}")
-"""
