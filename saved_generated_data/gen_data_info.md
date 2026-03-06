@@ -1,1 +1,1 @@
-In this folder should the generated data be stored. The data from the paper is here but compressed.
+In this folder should the generated data be stored. The data from the paper, used for quality estimation (x_samples_diffusion_melener_paper.npy) is to large, but it can be found at https://drive.google.com/file/d/1eTCXSC9aE2Yw_e1gdNG94aizTe7GQoIJ/view?usp=sharing .
