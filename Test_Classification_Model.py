@@ -161,8 +161,10 @@ if selected_feature == "FFT" or selected_feature == "TIME":
 else:        
     model = tm.VGG_Model(in_channels = cnn_in_layers, n_chans1=[32,32,32], k_size = [3,3,3], N_out = N_out).to(device)
 
-model.load_state_dict(torch.load("SavedClassificationModels/vgg_model_MEL_ENERGY_three_axis_M01_M03_BEST_SYNTH_PAPER.pth", map_location=torch.device('mps'))) 
-model.number_of_params()  # prints number of params
+# vgg_model_MEL_ENERGY_three_axis_M01_M03_SYNTH_PAPER
+# vgg_model_MEL_ENERGY_three_axis_M01_M03_BEST_BASE_PAPER
+model.load_state_dict(torch.load("SavedClassificationModels/vgg_model_MEL_ENERGY_three_axis_M01_M03_BEST_BASE_PAPER.pth"))  # map_location=torch.device('mps')
+model.number_of_params()  # prints number of paramsh
 model.eval()
 
 if args.focal_loss:
@@ -178,3 +180,6 @@ for pns in process_names_test:
        compute_test_focal(args.decision_treshold)
     else:     
        compute_test()
+       
+       
+       
