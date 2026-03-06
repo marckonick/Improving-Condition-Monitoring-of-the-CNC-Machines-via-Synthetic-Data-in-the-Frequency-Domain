@@ -20,4 +20,9 @@ Codes for Condition Monitoring
 
 
 Codes for Vibration Generation
-- Main_Segmentation.py                      - Prepare data for difussion model training. Load -> normalize -> denoise. Also saves per operation statistics for normalization
+- Main_Segmentation.py                      - Prepare data for difussion model training. Load -> normalize -> denoise. Also saves per operation statistics for normalization.
+- DiffusionModel_UNet.py                    - Definition of the diffusion model.
+- Main_Diffusion_MelEner.py                 - Training script for the diffusion model with additional losses.
+- SampleDataCFG.py                          - Sample augmented data for quality esitmaiton and classifier training.
+- Functions_CheckQuality_FeatureSpace.py    - Function used for computing MMD and KNN quality metrics.
+- Main_ComputeQualityMetrics.py             - Script for computing MMD and KNN quality metrics in the learned feature space. 
