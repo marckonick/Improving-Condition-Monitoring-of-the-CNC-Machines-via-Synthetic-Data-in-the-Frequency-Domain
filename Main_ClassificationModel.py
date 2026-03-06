@@ -141,9 +141,9 @@ def compute_test_focal(decision_treshold):
 def get_synth_data_():
     
     if selected_feature == 'MelLog':
-        x_add = np.load("x_samples_diffusion_MelLog.npy") # x_samples_diffusion_MelLog
+        x_add = np.load("x_samples_diffusion_MelLog.npy")
     elif selected_feature == 'MEL_ENERGY':
-        x_add = np.load("X_DIFF_AUG_FEAT.npy") # x_samples_diffusion_MelLog.npy X_DIFF_AUG_FEAT.npy
+        x_add = np.load("saved_generated_data/X_DIFF_AUG_FEAT.npy") 
     elif selected_feature == 'FFT':
         x_add = np.load("x_samples_diffusion_FFT.npy")
     elif selected_feature == 'TIME':
@@ -153,7 +153,7 @@ def get_synth_data_():
     
     print(f"x_add size: {x_add.shape}")
     
-    return x_add    
+    return x_add      
     
 args = parser.parse_args()
 selected_feature = args.selected_feature
@@ -266,5 +266,6 @@ for epoch in range(1, n_epochs + 1):
     #            compute_test()
     #         model.train()
             
+
 
 
