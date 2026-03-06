@@ -82,16 +82,16 @@ def get_knn_per_op(real_emb, y_emb, k=5):
 # %% CHECK CLASSIFICAITON PERFORMANCE 
 device = 'cpu'
 model = tm.VGG_Model(in_channels = 3, n_chans1=[32,32,32], k_size = [3,3,3], N_out = 1).to(device)
-model.load_state_dict(torch.load("saved_generated_data/vgg_model_MEL_ENERGY_three_axis_M01_M03_base_q.pth", map_location=torch.device('mps'))) # vgg_model_MEL_ENERGY_three_axis_M02_M03_best
+model.load_state_dict(torch.load("SavedClassificationModels/vgg_model_MEL_ENERGY_three_axis_M01_M03_BEST_BASE_PAPER.pth", map_location=torch.device('cpu')))
 model.eval() 
 
 # %% DISTRIBUTION QUALITY METRICS IN EMBEDDING SPACE (pre-fc1)
 
 real_emb_train = extract_fc1_input_embeddings(model, x_train_melener, device=device, batch_size=256)
-#sigma_fixed = _median_heuristic_sigma(real_emb_train, max_points=5000)# 0.17823803424835205
+#sigma_fixed = _median_heuristic_sigma(real_emb_train, max_points=5000)#
 
 
-sigma_fixed = 0.17823803424835205 # M1_M3
+sigma_fixed = 0.003977410960942507 # #M1_M3
 
 print(f"sigma_fixed is:", {sigma_fixed})
 
