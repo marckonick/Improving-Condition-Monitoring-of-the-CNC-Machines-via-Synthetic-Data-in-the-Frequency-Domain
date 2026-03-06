@@ -1,1 +1,0 @@
-The diffusion model used for generating paper results is in this folder. Since it is over 25 mb it needs to be downloaded - https://drive.google.com/file/d/1mF2i_m006NVxBxixn-MQ7FddG-9DM_HG/view?usp=sharing
