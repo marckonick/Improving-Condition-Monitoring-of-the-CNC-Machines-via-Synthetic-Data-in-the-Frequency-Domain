@@ -56,8 +56,11 @@ def plot_realfake_per_op(x_r, y_r, x_s, y_s, OP_ix):
     signals_r = x_r[y_r==OP_ix]
     signals_s = x_s[y_s==OP_ix]
     
-    S_r = signals_r[np.random.choice(len(signals_r)),:]
-    S_s = signals_s[np.random.choice(len(signals_s)),:]
+    rnd_img_num_r = np.random.choice(len(signals_r))
+    rnd_img_num_s = np.random.choice(len(signals_s))
+    
+    S_r = signals_r[rnd_img_num_r,:]
+    S_s = signals_s[rnd_img_num_s,:]
     
     time_axis = np.arange(n_frames) * hop_l / Fs
     mel_frequencies = librosa.mel_frequencies(n_mels=64, fmin=0, fmax=Fs/2)
@@ -94,7 +97,7 @@ def plot_realfake_per_op(x_r, y_r, x_s, y_s, OP_ix):
       cbar = fig.colorbar(im, ax=axes[i,1], fraction=0.046, pad=0.04, format="%+2.0f dB")  # Changed here
       cbar.ax.tick_params(labelsize= font_sz_cbar) 
       
-    fig.suptitle(f"Real features [left] and synthetic feature [right] \n tool-operation {OP_ix}", fontsize=font_sz_title)
+    fig.suptitle(f"Real eatures [left] and synthetic features [right] \n tool-operation {OP_ix}", fontsize=font_sz_title)
     axes[-1,0].set_xlabel('Time [s]', fontsize = font_sz_label)
     axes[-1,1].set_xlabel('Time [s]', fontsize = font_sz_label)
    
@@ -103,10 +106,16 @@ def plot_realfake_per_op(x_r, y_r, x_s, y_s, OP_ix):
         ax.tick_params(axis='x', pad=10)
         ax.tick_params(axis='y', pad=10)
     plt.tight_layout()
-    plt.savefig(f"saved_generated_images/OP_{OP_ix}_img_{np.random.randint(9626)}.eps")
-    plt.savefig(f"saved_generated_images/OP_{OP_ix}_img_{np.random.randint(9626)}.png")
+    rndint = np.random.randint(9626)
+    plt.savefig(f"saved_generated_images/OP_{OP_ix}_img_{rndint}.eps")
+    plt.savefig(f"saved_generated_images/OP_{OP_ix}_img_{rndint}.png")
     plt.show()
     plt.close()
+    
+    print(f"random image number real {rnd_img_num_r}") # 549
+    print(f"random image number synth {rnd_img_num_s}") # 12
+
+    print(f"random save number {rndint}")
     
 x_train_melener = np.load("X_melener_segment_filt_train.npy")
 x_test_melener = np.load("X_melener_segment_filt_test.npy")
@@ -122,10 +131,11 @@ y_synth = np.load("saved_generated_data/y_samples_diffusion_melener_paper.npy")
 
 
 # %%
-
 ix_op = 11
 
-plot_realfake_per_op(x_real, y_real, x_synth, y_synth, ix_op)
+for _ in range(10):
+
+    plot_realfake_per_op(x_real, y_real, x_synth, y_synth, ix_op)
 
 
 
